@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70C19CD1FA3C88100F52618 /* Brawlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C19CC1FA3C88100F52618 /* Brawlers.swift */; };
+		A77BA5DC1FACD6DD006DD07E /* StartTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */; };
+		A77BA5DE1FACE970006DD07E /* SetupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BA5DD1FACE970006DD07E /* SetupTVC.swift */; };
 		A7E8A1601F9A9549009CE758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */; };
 		A7E8A1621F9A9549009CE758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1611F9A9549009CE758 /* ViewController.swift */; };
 		A7E8A1651F9A9549009CE758 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7E8A1631F9A9549009CE758 /* Main.storyboard */; };
 		A7E8A1681F9A9549009CE758 /* EnhancedBossBattle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1661F9A9549009CE758 /* EnhancedBossBattle.xcdatamodeld */; };
 		A7E8A16A1F9A9549009CE758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7E8A1691F9A9549009CE758 /* Assets.xcassets */; };
-		A7E8A16D1F9A9549009CE758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7E8A16B1F9A9549009CE758 /* LaunchScreen.storyboard */; };
 		A7E8A1781F9A9549009CE758 /* EnhancedBossBattleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1771F9A9549009CE758 /* EnhancedBossBattleTests.swift */; };
 		A7E8A1831F9A9549009CE758 /* EnhancedBossBattleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1821F9A9549009CE758 /* EnhancedBossBattleUITests.swift */; };
+		A7E8A1911F9A95FC009CE758 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1901F9A95FC009CE758 /* Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A70C19CC1FA3C88100F52618 /* Brawlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brawlers.swift; sourceTree = "<group>"; };
+		A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTVC.swift; sourceTree = "<group>"; };
+		A77BA5DD1FACE970006DD07E /* SetupTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTVC.swift; sourceTree = "<group>"; };
 		A7E8A15C1F9A9549009CE758 /* EnhancedBossBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnhancedBossBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7E8A1611F9A9549009CE758 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A7E8A1641F9A9549009CE758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7E8A1671F9A9549009CE758 /* EnhancedBossBattle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EnhancedBossBattle.xcdatamodel; sourceTree = "<group>"; };
 		A7E8A1691F9A9549009CE758 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A7E8A16C1F9A9549009CE758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7E8A16E1F9A9549009CE758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7E8A1731F9A9549009CE758 /* EnhancedBossBattleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnhancedBossBattleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7E8A1771F9A9549009CE758 /* EnhancedBossBattleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedBossBattleTests.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 		A7E8A17E1F9A9549009CE758 /* EnhancedBossBattleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnhancedBossBattleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7E8A1821F9A9549009CE758 /* EnhancedBossBattleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedBossBattleUITests.swift; sourceTree = "<group>"; };
 		A7E8A1841F9A9549009CE758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7E8A1901F9A95FC009CE758 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */,
+				A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */,
+				A77BA5DD1FACE970006DD07E /* SetupTVC.swift */,
 				A7E8A1611F9A9549009CE758 /* ViewController.swift */,
 				A7E8A1631F9A9549009CE758 /* Main.storyboard */,
 				A7E8A1691F9A9549009CE758 /* Assets.xcassets */,
-				A7E8A16B1F9A9549009CE758 /* LaunchScreen.storyboard */,
 				A7E8A16E1F9A9549009CE758 /* Info.plist */,
 				A7E8A1661F9A9549009CE758 /* EnhancedBossBattle.xcdatamodeld */,
+				A7E8A1901F9A95FC009CE758 /* Record.swift */,
+				A70C19CC1FA3C88100F52618 /* Brawlers.swift */,
 			);
 			path = EnhancedBossBattle;
 			sourceTree = "<group>";
@@ -232,7 +241,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7E8A16D1F9A9549009CE758 /* LaunchScreen.storyboard in Resources */,
 				A7E8A16A1F9A9549009CE758 /* Assets.xcassets in Resources */,
 				A7E8A1651F9A9549009CE758 /* Main.storyboard in Resources */,
 			);
@@ -259,9 +267,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77BA5DE1FACE970006DD07E /* SetupTVC.swift in Sources */,
 				A7E8A1621F9A9549009CE758 /* ViewController.swift in Sources */,
 				A7E8A1601F9A9549009CE758 /* AppDelegate.swift in Sources */,
+				A77BA5DC1FACD6DD006DD07E /* StartTVC.swift in Sources */,
+				A7E8A1911F9A95FC009CE758 /* Record.swift in Sources */,
 				A7E8A1681F9A9549009CE758 /* EnhancedBossBattle.xcdatamodeld in Sources */,
+				A70C19CD1FA3C88100F52618 /* Brawlers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,14 +315,6 @@
 				A7E8A1641F9A9549009CE758 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A7E8A16B1F9A9549009CE758 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7E8A16C1F9A9549009CE758 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -528,6 +532,7 @@
 				A7E8A1891F9A9549009CE758 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7E8A18A1F9A9549009CE758 /* Build configuration list for PBXNativeTarget "EnhancedBossBattleTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +541,7 @@
 				A7E8A18C1F9A9549009CE758 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7E8A18D1F9A9549009CE758 /* Build configuration list for PBXNativeTarget "EnhancedBossBattleUITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +550,7 @@
 				A7E8A18F1F9A9549009CE758 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
