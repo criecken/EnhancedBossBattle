@@ -8,11 +8,20 @@
 
 import UIKit
 
-class StartTVC: UITableViewController {
+class StartTVC: UITableViewController, CharDelegate {
     let hero : Brawlers
     let boss : Brawlers
     var options = [String()]
     var selectedRow = ""
+    
+    func update(selectedRow: String, initHP: Int, weapon: String) {
+        if selectedRow == "Hero"{
+            let hero = Brawlers(initHP: initHP, finalHP: initHP, weapon: weapon)
+        }
+        else {
+            let boss = Brawlers(initHP: initHP, finalHP: initHP, weapon: weapon)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

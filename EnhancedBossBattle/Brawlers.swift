@@ -10,7 +10,7 @@ import Foundation
 
 class Brawlers {
     let initHP : Int
-    let finalHP : Int
+    var finalHP : Int
     let weapon : String
     
     init(initHP : Int, finalHP : Int, weapon : String) {

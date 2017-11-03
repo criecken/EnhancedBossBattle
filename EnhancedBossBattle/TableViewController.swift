@@ -1,5 +1,5 @@
 //
-//  SetupTVC.swift
+//  TableViewController.swift
 //  EnhancedBossBattle
 //
 //  Created by ABA Lab on 11/3/17.
@@ -8,23 +8,10 @@
 
 import UIKit
 
-protocol CharDelegate {
-    func update(selectedRow: String, initHP: Int, weapon: String)
-}
+class TableViewController: UITableViewController {
 
-class SetupTVC: UITableViewController {
-    var delegateUpdate : CharDelegate?
-    var options = [String()]
-    var selectedRow = String()
-    var weapon = String()
-    @IBOutlet weak var charHPField: UITextField!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,17 +19,7 @@ class SetupTVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    @objc func back(sender: UIBarButtonItem) {
-        // Perform your custom actions
-        // ...
-        // Go back to the previous ViewController
-        
-       // delegateUpdate?.update(newEmails: changedEmails, currentEmails: emails, updateRow: selectedRow)
-        delegateUpdate?.update(selectedRow: selectedRow, initHP: <#T##Int#>, weapon: weapon)
-        
-        _ = navigationController?.popViewController(animated: true)
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,30 +29,23 @@ class SetupTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return options.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = options[indexPath.row]
+
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: react to user selecting row
-        //I want the detail view controller to update based on the row that I selected
-        weapon = options[indexPath.row]
-        //TODO: get cell information
-        //call segue manually
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
