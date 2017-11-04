@@ -37,15 +37,27 @@ class SetupTVC: UITableViewController {
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        
+        var HP = Int(charHPField.text!)
+        if HP == nil {
+            presentAlert(title: "Error", message: "HP is not an integer.")
+        }
+        else {
+            delegateUpdate?.update(selectedRow: selectedRow, initHP: HP!, weapon: weapon)
+            
+            _ = navigationController?.popViewController(animated: true)
+        }
        // delegateUpdate?.update(newEmails: changedEmails, currentEmails: emails, updateRow: selectedRow)
-        delegateUpdate?.update(selectedRow: selectedRow, initHP: <#T##Int#>, weapon: weapon)
-        
-        _ = navigationController?.popViewController(animated: true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source

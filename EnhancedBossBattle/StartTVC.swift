@@ -9,27 +9,53 @@
 import UIKit
 
 class StartTVC: UITableViewController, CharDelegate {
-    let hero : Brawlers
-    let boss : Brawlers
     var options = [String()]
+    var bossWeapon = String()
+    var heroWeapon = String()
+    var bossHP : Int = Int()
+    var heroHP : Int = Int()
     var selectedRow = ""
+    var delegate : CharDelegate?
+    var dest = ""
     
     func update(selectedRow: String, initHP: Int, weapon: String) {
         if selectedRow == "Hero"{
             let hero = Brawlers(initHP: initHP, finalHP: initHP, weapon: weapon)
+            heroWeapon = hero.weapon
+            heroHP = hero.initHP
+            print (hero.finalHP)
         }
         else {
             let boss = Brawlers(initHP: initHP, finalHP: initHP, weapon: weapon)
+            bossWeapon = boss.weapon
+            bossHP = boss.initHP
         }
     }
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let startButton = UIBarButtonItem(title: "Start", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.start(sender:)))
+        self.navigationItem.rightBarButtonItem = startButton
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func start(sender: UIBarButtonItem) {
+         dest = "start"
+        performSegue(withIdentifier: "startSelected", sender: self)
+        // delegateUpdate?.update(newEmails: changedEmails, currentEmails: emails, updateRow: selectedRow)
+    }
+    
+    func start(selectedRow: String, initHP: Int, weapon: String) {
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +91,7 @@ class StartTVC: UITableViewController, CharDelegate {
         //TODO: get cell information
         selectedRow = options[indexPath.row]
         //call segue manually
+        dest = "setup"
         performSegue(withIdentifier: "cellSelected", sender: self)
     }
     /*
@@ -110,8 +137,17 @@ class StartTVC: UITableViewController, CharDelegate {
         
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if dest == "start" {
+            let destVC = segue.destination as! BattleVC
+            destVC.bossHP = self.bossHP
+            destVC.heroHP = self.heroHP
+            destVC.bossWeapon = self.bossWeapon
+            destVC.heroWeapon = self.heroWeapon
+        }
+        else {
         let destVC = segue.destination as! SetupTVC
         destVC.selectedRow = selectedRow
+        destVC.delegateUpdate = delegate
         switch selectedRow {
         case "Hero":
             destVC.options = ["Rock of Justice", "Paper of Hope", "Scissors of Light", "Lizard of Love", "Spock of Truth"]
@@ -119,6 +155,7 @@ class StartTVC: UITableViewController, CharDelegate {
             destVC.options = ["Rock of Inequity", "Paper of Despair", "Scissors of Darkness", "Lizard of Hatred", "Spock of Deceit"]
         default:
             destVC.options = ["No"]
+        }
         }
         print("here")
         

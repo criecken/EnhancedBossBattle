@@ -10,6 +10,7 @@
 		A70C19CD1FA3C88100F52618 /* Brawlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70C19CC1FA3C88100F52618 /* Brawlers.swift */; };
 		A77BA5DC1FACD6DD006DD07E /* StartTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */; };
 		A77BA5DE1FACE970006DD07E /* SetupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BA5DD1FACE970006DD07E /* SetupTVC.swift */; };
+		A77BA5E01FAD420E006DD07E /* BattleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BA5DF1FAD420E006DD07E /* BattleVC.swift */; };
 		A7E8A1601F9A9549009CE758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */; };
 		A7E8A1621F9A9549009CE758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8A1611F9A9549009CE758 /* ViewController.swift */; };
 		A7E8A1651F9A9549009CE758 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7E8A1631F9A9549009CE758 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		A70C19CC1FA3C88100F52618 /* Brawlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brawlers.swift; sourceTree = "<group>"; };
 		A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTVC.swift; sourceTree = "<group>"; };
 		A77BA5DD1FACE970006DD07E /* SetupTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTVC.swift; sourceTree = "<group>"; };
+		A77BA5DF1FAD420E006DD07E /* BattleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleVC.swift; sourceTree = "<group>"; };
 		A7E8A15C1F9A9549009CE758 /* EnhancedBossBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnhancedBossBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7E8A1611F9A9549009CE758 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				A7E8A15F1F9A9549009CE758 /* AppDelegate.swift */,
 				A77BA5DB1FACD6DD006DD07E /* StartTVC.swift */,
 				A77BA5DD1FACE970006DD07E /* SetupTVC.swift */,
+				A77BA5DF1FAD420E006DD07E /* BattleVC.swift */,
 				A7E8A1611F9A9549009CE758 /* ViewController.swift */,
 				A7E8A1631F9A9549009CE758 /* Main.storyboard */,
 				A7E8A1691F9A9549009CE758 /* Assets.xcassets */,
@@ -273,6 +276,7 @@
 				A77BA5DC1FACD6DD006DD07E /* StartTVC.swift in Sources */,
 				A7E8A1911F9A95FC009CE758 /* Record.swift in Sources */,
 				A7E8A1681F9A9549009CE758 /* EnhancedBossBattle.xcdatamodeld in Sources */,
+				A77BA5E01FAD420E006DD07E /* BattleVC.swift in Sources */,
 				A70C19CD1FA3C88100F52618 /* Brawlers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

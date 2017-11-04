@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let entry = self.window?.rootViewController as! UINavigationController
         let startVC = entry.viewControllers.first as! StartTVC
+        
+        startVC.delegate = startVC
         startVC.options = ["Hero", "Boss"]
         return true
     }
