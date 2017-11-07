@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StartTVC: UITableViewController, CharDelegate {
+class StartTVC: UITableViewController, CharDelegate, BattleDelegate {
     var options = [String()]
     var bossWeapon = String()
     var heroWeapon = String()
@@ -16,7 +16,11 @@ class StartTVC: UITableViewController, CharDelegate {
     var heroHP : Int = Int()
     var selectedRow = ""
     var delegate : CharDelegate?
+    
+    var battleDelegate : BattleDelegate?
     var dest = ""
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var record = [Battle]()
     
     func update(selectedRow: String, initHP: Int, weapon: String) {
         if selectedRow == "Hero"{
@@ -25,20 +29,28 @@ class StartTVC: UITableViewController, CharDelegate {
             heroHP = hero.initHP
             print (hero.finalHP)
         }
-        else {
+        else if selectedRow == "Boss"{
             let boss = Brawlers(initHP: initHP, finalHP: initHP, weapon: weapon)
             bossWeapon = boss.weapon
             bossHP = boss.initHP
         }
     }
     
+    func updateRecord(winner: String, heroInitHp: Int, bossInitHp: Int, winnerHP: Int, heroWeapon: String, bossWeapon: String) {
+     getData()
+    }
     
+    
+    @IBAction func recordButton(_ sender: Any) {
+        dest = "record"
+       // performSegue(withIdentifier: "recordSegue", sender: self)
+    }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getData()
         let startButton = UIBarButtonItem(title: "Start", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.start(sender:)))
         self.navigationItem.rightBarButtonItem = startButton
         // Uncomment the following line to preserve selection between presentations
@@ -46,6 +58,14 @@ class StartTVC: UITableViewController, CharDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func getData() {
+        do {
+            record = try context.fetch(Battle.fetchRequest()) 
+        } catch {
+            print("Fetching Failed")
+        }
     }
     
     @objc func start(sender: UIBarButtonItem) {
@@ -91,8 +111,16 @@ class StartTVC: UITableViewController, CharDelegate {
         //TODO: get cell information
         selectedRow = options[indexPath.row]
         //call segue manually
-        dest = "setup"
-        performSegue(withIdentifier: "cellSelected", sender: self)
+        if selectedRow == "Record"{
+            dest = "record"
+            performSegue(withIdentifier: "recordSegue", sender: self)
+        }
+        else {
+            dest = "setup"
+            performSegue(withIdentifier: "cellSelected", sender: self)
+        }
+        
+        
     }
     /*
     // Override to support conditional editing of the table view.
@@ -143,8 +171,11 @@ class StartTVC: UITableViewController, CharDelegate {
             destVC.heroHP = self.heroHP
             destVC.bossWeapon = self.bossWeapon
             destVC.heroWeapon = self.heroWeapon
+            destVC.initBossHP = self.bossHP
+            destVC.initHeroHP = self.heroHP
+            destVC.battleDelegate = self.battleDelegate
         }
-        else {
+        else if dest == "setup"{
         let destVC = segue.destination as! SetupTVC
         destVC.selectedRow = selectedRow
         destVC.delegateUpdate = delegate
@@ -156,6 +187,9 @@ class StartTVC: UITableViewController, CharDelegate {
         default:
             destVC.options = ["No"]
         }
+        }
+        else{
+            let destVC = segue.destination as! RecordTVC
         }
         print("here")
         

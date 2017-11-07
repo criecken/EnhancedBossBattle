@@ -9,16 +9,30 @@
 import UIKit
 import Foundation
 
+protocol BattleDelegate {
+    func updateRecord(winner: String, heroInitHp: Int, bossInitHp: Int, winnerHP: Int, heroWeapon: String, bossWeapon: String)
+}
+
 class BattleVC: UIViewController {
+     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var battleDelegate : BattleDelegate?
     var bossWeapon = String()
     var heroWeapon = String()
     var bossHP : Int = Int()
     var heroHP : Int = Int()
     let attack = 25
+    var initHeroHP = Int()
+    var initBossHP = Int()
+    
+    @IBOutlet weak var heroHealthBar: UIProgressView!
+    @IBOutlet weak var bossHealthBar: UIProgressView!
+    @IBOutlet weak var updateBox: UILabel!
     
     @IBAction func attButton(_ sender: AnyObject) {
         let input = sender.currentTitle!!
-        if input == "Attack" {
+        let heroStartHP = heroHP
+        let bossStartHP = bossHP
+        if input == "Attack" && bossHP > 0 && heroHP > 0 {
             switch heroWeapon {
             case "Rock of Justice":
                 if bossWeapon == "Scissors of Darkness" || bossWeapon == "Lizard of Hatred"{
@@ -69,7 +83,7 @@ class BattleVC: UIViewController {
                 // this shouldn't happen
                 heroHP = 0
             }        }
-        else {
+        else if input == "Defend" && bossHP > 0 && heroHP > 0{
             switch heroWeapon {
             case "Rock of Justice":
                 if bossWeapon == "Scissors of Darkness" || bossWeapon == "Lizard of Hatred"{
@@ -121,6 +135,10 @@ class BattleVC: UIViewController {
                 heroHP = 0
             }
         }
+        else {
+            heroHP = initHeroHP
+            bossHP = initBossHP
+        }
         
         if heroHP < 0 {
             heroHP = 0
@@ -131,12 +149,52 @@ class BattleVC: UIViewController {
         
         if heroHP == 0 || bossHP == 0 {
             print ("Game Over")
+            let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
+            self.navigationItem.leftBarButtonItem = newBackButton
         }
+        
+        bossHealthBar.progress = Float(bossHP)/Float(initBossHP)
+        heroHealthBar.progress = Float(heroHP)/Float(initHeroHP)
+        updateBox.text = "Hero lost: \(heroStartHP-heroHP) Hit Points,                         Boss lost: \(bossStartHP - bossHP) Hit Points "
     }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        // Perform your custom actions
+        // ...
+        let newBattle = Battle(context: context)
+        // Go back to the previous ViewController
+        if heroHP < bossHP {
+            let winner = "Boss"
+            
+            newBattle.winner = winner
+            newBattle.winnerFinalHP = Int16(bossHP)
+            battleDelegate?.updateRecord(winner: winner, heroInitHp: initHeroHP, bossInitHp: initBossHP, winnerHP: bossHP, heroWeapon: heroWeapon, bossWeapon: bossWeapon)
+        }
+        else {
+            let winner = "Hero"
+            newBattle.winner = winner
+            newBattle.winnerFinalHP = Int16(heroHP)
+            battleDelegate?.updateRecord(winner: winner, heroInitHp: initHeroHP, bossInitHp: initBossHP, winnerHP: heroHP, heroWeapon: heroWeapon, bossWeapon: bossWeapon)
+        }
+        newBattle.bossStartHP = Int16(initBossHP)
+        newBattle.bossWeapon = bossWeapon
+        newBattle.heroStartHP = Int16(initHeroHP)
+        newBattle.heroWeapon = heroWeapon
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-
+        heroHealthBar.progress = 1
+        bossHealthBar.progress = 1
+        heroHealthBar.progressTintColor = UIColor.green
+        bossHealthBar.progressTintColor = UIColor.green
+        
         // Do any additional setup after loading the view.
     }
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13154.30" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
-        <attribute name="numLosses" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="numWins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="recResults" optional="YES" attributeType="Transformable" syncable="YES"/>
+    <entity name="Battle" representedClassName="Battle" syncable="YES" codeGenerationType="class">
+        <attribute name="bossStartHP" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="bossWeapon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="heroStartHP" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="heroWeapon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="winner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="winnerFinalHP" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Entity" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Battle" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

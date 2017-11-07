@@ -1,29 +1,21 @@
 //
-//  SetupTVC.swift
+//  RecordTVC.swift
 //  EnhancedBossBattle
 //
-//  Created by ABA Lab on 11/3/17.
+//  Created by ABA Lab on 11/6/17.
 //  Copyright © 2017 ABA Lab. All rights reserved.
 //
 
 import UIKit
 
-protocol CharDelegate {
-    func update(selectedRow: String, initHP: Int, weapon: String)
-}
-
-class SetupTVC: UITableViewController {
-    var delegateUpdate : CharDelegate?
-    var options = [String()]
-    var selectedRow = String()
-    var weapon = String()
-    @IBOutlet weak var charHPField: UITextField!
+class RecordTVC: UITableViewController {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var battles : [Battle] = []
+    var record : [Battle] = []
+    var battle = Battle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,33 +23,48 @@ class SetupTVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    @objc func back(sender: UIBarButtonItem) {
-        // Perform your custom actions
-        // ...
-        // Go back to the previous ViewController
-        var HP = Int(charHPField.text!)
-        if HP == nil {
-            presentAlert(title: "Error", message: "HP is not an integer.")
-        }
-        else {
-            delegateUpdate?.update(selectedRow: selectedRow, initHP: HP!, weapon: weapon)
-            
-            _ = navigationController?.popViewController(animated: true)
-        }
-       // delegateUpdate?.update(newEmails: changedEmails, currentEmails: emails, updateRow: selectedRow)
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func presentAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO: react to user selecting row
+        //I want the detail view controller to update based on the row that I selected
+        
+        //TODO: get cell information
+        let selectedRow = indexPath.row
+        battle = battles[indexPath.row]
+            
+            performSegue(withIdentifier: "recordShow", sender: self)
+            
+        
+        
+    }
+    
+    
+    func fetchData() {
+        
+        do {
+            
+            battles = try context.fetch(Battle.fetchRequest())
+            record = battles
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+            
+        } catch {
+            print("Couldn't Fetch Data")
+        }
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -68,27 +75,18 @@ class SetupTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return options.count
+        return battles.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
+        cell.textLabel?.text = battles[indexPath.row].winner! + " Won" //says who won
         // Configure the cell...
-        cell.textLabel?.text = options[indexPath.row]
+
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: react to user selecting row
-        //I want the detail view controller to update based on the row that I selected
-        weapon = options[indexPath.row]
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-        //TODO: get cell information
-        //call segue manually
-    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -125,14 +123,17 @@ class SetupTVC: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as! ViewController //sets next view as ViewController
+        destVC.battle = self.battle //sends the battle to the next view
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+   
 
 }

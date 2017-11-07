@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let startVC = entry.viewControllers.first as! StartTVC
         
         startVC.delegate = startVC
+        startVC.battleDelegate = startVC
         startVC.options = ["Hero", "Boss"]
         return true
     }
