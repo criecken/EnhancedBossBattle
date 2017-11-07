@@ -9,13 +9,15 @@
 import UIKit
 import Foundation
 
-protocol BattleDelegate {
-    func updateRecord(winner: String, heroInitHp: Int, bossInitHp: Int, winnerHP: Int, heroWeapon: String, bossWeapon: String)
+protocol BattleDelegate {   //delegate for battle update
+    func updateRecord(winner: String, heroInitHp: Int, bossInitHp: Int, winnerHP: Int, heroWeapon: String, bossWeapon: String)  //update method
 }
 
 class BattleVC: UIViewController {
-     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var battleDelegate : BattleDelegate?
+     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext  // init context
+    var battleDelegate : BattleDelegate? //init delegate
+    
+    //init battle stats
     var bossWeapon = String()
     var heroWeapon = String()
     var bossHP : Int = Int()
@@ -24,16 +26,17 @@ class BattleVC: UIViewController {
     var initHeroHP = Int()
     var initBossHP = Int()
     
+    //init GUI 
     @IBOutlet weak var heroHealthBar: UIProgressView!
     @IBOutlet weak var bossHealthBar: UIProgressView!
     @IBOutlet weak var updateBox: UILabel!
     
-    @IBAction func attButton(_ sender: AnyObject) {
+    @IBAction func attButton(_ sender: AnyObject) {//if attack, defend, or reset
         let input = sender.currentTitle!!
         let heroStartHP = heroHP
         let bossStartHP = bossHP
-        if input == "Attack" && bossHP > 0 && heroHP > 0 {
-            switch heroWeapon {
+        if input == "Attack" && bossHP > 0 && heroHP > 0 {//only run if the battle is ongoing and user hit attack 
+            switch heroWeapon { //possible hero weapon scenarios according to rules of rock, paper, scissors, lizard, spock
             case "Rock of Justice":
                 if bossWeapon == "Scissors of Darkness" || bossWeapon == "Lizard of Hatred"{
                     bossHP = bossHP - attack - 15
@@ -83,8 +86,8 @@ class BattleVC: UIViewController {
                 // this shouldn't happen
                 heroHP = 0
             }        }
-        else if input == "Defend" && bossHP > 0 && heroHP > 0{
-            switch heroWeapon {
+        else if input == "Defend" && bossHP > 0 && heroHP > 0{  //only run if user hit defend and battle is ongoing 
+            switch heroWeapon { //possible hero weapon scenarios in defensive scenarios, oposite the rules of rock, paper, scissors, lizard, spock
             case "Rock of Justice":
                 if bossWeapon == "Scissors of Darkness" || bossWeapon == "Lizard of Hatred"{
                     bossHP = bossHP - attack + 15
@@ -135,19 +138,19 @@ class BattleVC: UIViewController {
                 heroHP = 0
             }
         }
-        else {
+        else {      //user hit the reset button 
             heroHP = initHeroHP
             bossHP = initBossHP
         }
         
-        if heroHP < 0 {
+        if heroHP < 0 { //user cannot have negative HP 
             heroHP = 0
         }
-        else if bossHP < 0 {
+        else if bossHP < 0 {    //boss cannot have negative HP 
             bossHP = 0
         }
         
-        if heroHP == 0 || bossHP == 0 {
+        if heroHP == 0 || bossHP == 0 { //game is over, activate back button 
             print ("Game Over")
             let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
             self.navigationItem.leftBarButtonItem = newBackButton
@@ -161,9 +164,9 @@ class BattleVC: UIViewController {
     @objc func back(sender: UIBarButtonItem) {
         // Perform your custom actions
         // ...
-        let newBattle = Battle(context: context)
+        let newBattle = Battle(context: context)    //saves the battle
         // Go back to the previous ViewController
-        if heroHP < bossHP {
+        if heroHP < bossHP {    //sets winner and updates
             let winner = "Boss"
             
             newBattle.winner = winner
@@ -176,11 +179,12 @@ class BattleVC: UIViewController {
             newBattle.winnerFinalHP = Int16(heroHP)
             battleDelegate?.updateRecord(winner: winner, heroInitHp: initHeroHP, bossInitHp: initBossHP, winnerHP: heroHP, heroWeapon: heroWeapon, bossWeapon: bossWeapon)
         }
+        //sets battle record
         newBattle.bossStartHP = Int16(initBossHP)
         newBattle.bossWeapon = bossWeapon
         newBattle.heroStartHP = Int16(initHeroHP)
         newBattle.heroWeapon = heroWeapon
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()   //saves record
         
         
         _ = navigationController?.popViewController(animated: true)
@@ -192,8 +196,8 @@ class BattleVC: UIViewController {
         self.navigationItem.hidesBackButton = true
         heroHealthBar.progress = 1
         bossHealthBar.progress = 1
-        heroHealthBar.progressTintColor = UIColor.green
-        bossHealthBar.progressTintColor = UIColor.green
+        heroHealthBar.progressTintColor = UIColor.green //sets color to green
+        bossHealthBar.progressTintColor = UIColor.green //sets color to green 
         
         // Do any additional setup after loading the view.
     }
