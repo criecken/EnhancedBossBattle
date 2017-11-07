@@ -8,20 +8,20 @@
 
 import UIKit
 
-protocol CharDelegate {
-    func update(selectedRow: String, initHP: Int, weapon: String)
+protocol CharDelegate { //create delegate for character update
+    func update(selectedRow: String, initHP: Int, weapon: String) //character update method
 }
 
 class SetupTVC: UITableViewController {
-    var delegateUpdate : CharDelegate?
-    var options = [String()]
-    var selectedRow = String()
-    var weapon = String()
+    var delegateUpdate : CharDelegate?  //init delegate
+    var options = [String()]            //stores options
+    var selectedRow = String()          //remembers if boss or hero 
+    var weapon = String()               //stores weapon
     @IBOutlet weak var charHPField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true  //hide back button until user selects weapon
         
         
 
@@ -32,18 +32,18 @@ class SetupTVC: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    @objc func back(sender: UIBarButtonItem) {
+    @objc func back(sender: UIBarButtonItem) {//if back button is pressed 
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        var HP = Int(charHPField.text!)
-        if HP == nil {
-            presentAlert(title: "Error", message: "HP is not an integer.")
+        var HP = Int(charHPField.text!) //sets hp as an Int
+        if HP == nil {  //if hp is nil an error will pop up 
+            presentAlert(title: "Error", message: "HP is not an integer.")  
         }
-        else {
-            delegateUpdate?.update(selectedRow: selectedRow, initHP: HP!, weapon: weapon)
+        else {  //if hp is good then the update will run 
+            delegateUpdate?.update(selectedRow: selectedRow, initHP: HP!, weapon: weapon)//update
             
-            _ = navigationController?.popViewController(animated: true)
+            _ = navigationController?.popViewController(animated: true)//back to previous view 
         }
        // delegateUpdate?.update(newEmails: changedEmails, currentEmails: emails, updateRow: selectedRow)
     }
@@ -53,7 +53,7 @@ class SetupTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func presentAlert(title: String, message: String) {
+    func presentAlert(title: String, message: String) {// sends alert
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -68,7 +68,7 @@ class SetupTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return options.count
+        return options.count    //returns num options
     }
 
     
@@ -76,16 +76,16 @@ class SetupTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = options[indexPath.row]
+        cell.textLabel?.text = options[indexPath.row]   //sets label text
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO: react to user selecting row
         //I want the detail view controller to update based on the row that I selected
-        weapon = options[indexPath.row]
+        weapon = options[indexPath.row] //sets weapon choice from user selectoin 
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
+        self.navigationItem.leftBarButtonItem = newBackButton   //back button available if user selects a weapon 
         //TODO: get cell information
         //call segue manually
     }
