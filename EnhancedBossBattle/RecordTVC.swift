@@ -10,9 +10,9 @@ import UIKit
 
 class RecordTVC: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var battles : [Battle] = []
-    var record : [Battle] = []
-    var battle = Battle()
+    var battles : [Battle] = [] //placeholder for battles sent to user
+    var record : [Battle] = []  //placeholder for record checked for battles
+    var battle = Battle()       //placeholder for individual battle selection 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class RecordTVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchData()
+        fetchData() //fetch data
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -38,28 +38,28 @@ class RecordTVC: UITableViewController {
         //I want the detail view controller to update based on the row that I selected
         
         //TODO: get cell information
-        let selectedRow = indexPath.row
-        battle = battles[indexPath.row]
+        let selectedRow = indexPath.row     //remembers which row the user selected
+        battle = battles[indexPath.row]     //sets the battle
             
-            performSegue(withIdentifier: "recordShow", sender: self)
+            performSegue(withIdentifier: "recordShow", sender: self)    //perform segue
             
         
         
     }
     
     
-    func fetchData() {
+    func fetchData() {      //fetch data
         
         do {
             
-            battles = try context.fetch(Battle.fetchRequest())
+            battles = try context.fetch(Battle.fetchRequest())  //tries to get battles 
             record = battles
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
             
             
-        } catch {
+        } catch {       //catch if battles unavailable 
             print("Couldn't Fetch Data")
         }
         
@@ -75,7 +75,7 @@ class RecordTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return battles.count
+        return battles.count        //return num battles 
     }
 
     
